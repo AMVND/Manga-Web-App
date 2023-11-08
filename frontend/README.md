@@ -109,35 +109,46 @@ You can check the **package.json** file and setup with your version  **¯\ _(ツ
 
 ## 3-Demo
 
-What ?? Demo ?? I will update later because I'm playing game right now ~~~
+- #### Login page
+![Login page](./demo/login_page.png)
 
+- #### Signup page
+![Signup page](./demo/signup_page.png)
+
+
+| Login page responsive                                                             | Signup page responsive                                                      |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| ![Login page_responsive](./demo/res_login.png)                                    | ![Signup page_responsive](./demo/res_signup.png)
 
 ## 4-API Reference
 
-#### Get all items
+#### Authorize Login
 
 ```http
-  GET /api/items
+POST /auth/login
 ```
 
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `api_key` | `string` | **Required**. Your API key |
+| url       | method   | body                                                |
+| :-------- | :------- | :-------------------------------------------------- |
+| `API_BASE_URL + "/auth/login"` | `POST` | JSON.stringify(**loginRequest**) |
 
-#### Get item
+#### Authorize Signup
 
 ```http
-  GET /api/items/${id}
+POST /auth/signup
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of item to fetch |
+| url       | method   | body                                                  |
+| :-------- | :------- | :---------------------------------------------------- |
+| `API_BASE_URL + "/auth/signup"` | `POST` | JSON.stringify(**signupRequest**) |
 
-#### add(num1, num2)
-
-Takes two numbers and returns the sum.
-
+#### GET Current User
+```http
+GET /user/me
+```
+| url       | method   | body                                                  |
+| :-------- | :------- | :---------------------------------------------------- |
+| `API_BASE_URL + "/user/me"` | `GET` |  |
 
 ## 5-Other
 
