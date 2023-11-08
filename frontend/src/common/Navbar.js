@@ -4,6 +4,9 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { navLinks } from '../util/Navigation';
 import klee from '../img/klee_icon.png'
+import { Collapse, Dropdown, initTE } from "tw-elements";
+  
+  initTE({ Collapse, Dropdown });
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -24,6 +27,7 @@ export class Navbar extends Component {
                                     </div>
                                     <div className="hidden md:block">
                                         <div className="ml-10 flex items-baseline space-x-4">
+
                                             {navLinks.map((item) => (
                                                 <Disclosure.Button
                                                     key={item.name}

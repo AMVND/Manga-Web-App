@@ -4,23 +4,38 @@ export const navLinks = [
      current: false
     },
     {
-      name: "About Us",
-      href: "/profile",
+      name: "Hot",
+      href: "/hot",
       current: false
     },
     {
-      name: "Services",
-      href: "/",
+      name: "Theo dõi",
+      href: "/follow",
       current: false
     },
     {
-      name: "Blog",
-      href: "/profile",
+      name: "Lịch sử",
+      href: "/history",
       current: false
     },
     {
-      name: "Contact Us",
-      href: "/",
+      name: "Thể loại",
+      href: "/type",
+      current: false
+    },
+    {
+      name: "Tìm truyện",
+      href: "/search",
+      current: false
+    },
+    {
+      name: "Group",
+      href: "/group",
+      current: false
+    },
+    {
+      name: "Fanpage",
+      href: "/facebook.com/",
       current: false
     },
   ];
