@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
 
 export class Profile extends Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         return (
             // component 
             <div className="h-full bg-gray-200 p-8">
                 <div className="bg-white rounded-lg shadow-xl pb-8">
                     <div className="w-full h-[250px]">
-                        <img src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg" className="w-full h-full rounded-tl-lg rounded-tr-lg" />
+                        <img src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg" className="w-full h-full rounded-tl-lg rounded-tr-lg" alt='bg'/>
                     </div>
                     {/* Informations */}
                     <div className="flex flex-col items-center -mt-20">

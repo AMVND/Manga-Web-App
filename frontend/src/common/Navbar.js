@@ -2,71 +2,63 @@ import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { navLinks } from '../util/Navigation';
 import klee from '../img/klee_icon.png'
 
+function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+}
+
 export class Navbar extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
-            <Disclosure as="nav" className="bg-blue-500 sticky top-0">
+            <Disclosure as="nav" className="bg-blue-500 sticky top-0 z-50">
                 {({ open }) => (
                     <>
                         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                             <div className="flex h-16 items-center justify-between">
                                 <div className="flex items-center">
-                                    {/* LOGO */}
-                                    <div className="flex items-center  justify-center flex-shrink-0">
+                                    <div className="flex items-center justify-center flex-shrink-0">
                                         <img src={klee} alt='logo' className='h-14' />
-                                        <Link to="/" className='text-white font-bold'>
-                                            Wibu Corner</Link>
+                                        <Link to="/" className='text-white font-bold'>Wibu Corner</Link>
                                     </div>
-                                    {/* ẨN KHI Ở MOBILE */}
                                     <div className="hidden md:block">
                                         <div className="ml-10 flex items-baseline space-x-4">
-                                            {/* CHUNG */}
-                                            <div>
-                                                <Link to={"/"} className="text-white hover:bg-white hover:text-black rounded-md px-3 py-2 text-sm font-medium">
-                                                    Trang chủ
-                                                </Link>
-                                            </div>
-                                            {/* PHÂN QUYỀN */}
+                                            {navLinks.map((item) => (
+                                                <Disclosure.Button
+                                                    key={item.name}
+                                                    as="a"
+                                                    href={item.href}
+                                                    className={classNames(
+                                                        item.current ? 'bg-blue-900 text-white' : 'text-gray-300 hover:bg-blue-700 hover:text-white',
+                                                        'block rounded-md px-3 py-2 text-base font-medium'
+                                                    )}
+                                                    aria-current={item.current ? 'page' : undefined}
+                                                >
+                                                    {item.name}
+                                                </Disclosure.Button>
+                                            ))}
                                         </div>
                                     </div>
                                 </div>
-                                {/* ẨN KHI Ở MOBILE */}
                                 <div className="hidden md:block">
                                     <div className="ml-4 flex items-center md:ml-6">
-                                        {/* THÔNG BÁO */}
                                         <button
                                             type="button"
-                                            className="relative rounded-full bg-blue-600 p-1 text-white hover:text-gray-600"
+                                            className="relative rounded-full bg-blue-800 p-1 text-blue-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-800"
                                         >
                                             <span className="absolute -inset-1.5" />
-                                            <span className="sr-only">View notifications</span>
+                                            <span className="sr-only">Xem thông báo</span>
                                             <BellIcon className="h-6 w-6" aria-hidden="true" />
                                         </button>
 
-                                        {/* MENU MỞ XUỐNG */}
+                                        {/* Profile dropdown */}
                                         <Menu as="div" className="relative ml-3">
-                                            {/* ẢNH NGƯỜI DÙNG */}
                                             <div>
-                                                <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                                <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-blue-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-800">
                                                     <span className="absolute -inset-1.5" />
                                                     <span className="sr-only">Open user menu</span>
-                                                    {
-                                                        this.props.currentUser.imageUrl ? (
-                                                            <img src={this.props.currentUser.imageUrl} alt={this.props.currentUser.name} className="h-8 w-8 rounded-full bg-slate-200" />
-                                                        ) : (
-                                                            <div className="text-avatar">
-                                                                <span>{this.props.currentUser.name && this.props.currentUser.name[0]}</span>
-                                                            </div>
-                                                        )
-                                                    }
-
+                                                    <img className="h-8 w-8 rounded-full" src={this.props.currentUser.imageUrl} alt={this.props.currentUser.name} />
                                                 </Menu.Button>
                                             </div>
                                             <Transition
@@ -78,14 +70,13 @@ export class Navbar extends Component {
                                                 leaveFrom="transform opacity-100 scale-100"
                                                 leaveTo="transform opacity-0 scale-95"
                                             >
-                                                {/* MENU NGƯỜI DÙNG */}
-                                                <Menu.Items as="div" className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                                     {this.props.authenticated ? (
                                                         // KHI ĐĂNG NHẬP
                                                         <Menu.Item as="div">
                                                             <div className="block px-4 py-2 text-sm text-black hover:bg-blue-500 hover:text-white">
                                                                 <Link to={"/profile"} className="block px-4 py-2 text-sm">
-                                                                    Thông tin
+                                                                    {this.props.currentUser.name}
                                                                 </Link>
                                                             </div>
                                                             <div className="block px-4 py-2 text-sm text-black hover:bg-blue-500 hover:text-white">
@@ -113,10 +104,9 @@ export class Navbar extends Component {
                                         </Menu>
                                     </div>
                                 </div>
-                                {/* ẨN KHI Ở MÀN RỘNG */}
                                 <div className="-mr-2 flex md:hidden">
-                                    {/* NÚT BẤM KHI Ở DẠNG MOBILE */}
-                                    <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-blue-600 p-2 text-white hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-600">
+                                    {/* Mobile menu button */}
+                                    <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-blue-800 p-2 text-blue-400 hover:bg-blue-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-800">
                                         <span className="absolute -inset-0.5" />
                                         <span className="sr-only">Open main menu</span>
                                         {open ? (
@@ -130,130 +120,63 @@ export class Navbar extends Component {
                         </div>
 
                         <Disclosure.Panel className="md:hidden">
-                            {/* PHẦN NAV TÙY CHỌN */}
                             <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                                <div className="hidden md:block">
-                                    <div className="ml-10 flex items-baseline space-x-4">
-                                        {/* CHUNG */}
-                                        <Disclosure.Button>
-                                            <Link to={"/"} className="text-white hover:bg-white hover:text-black rounded-md px-3 py-2 text-sm font-medium">
-                                                Trang chủ
-                                            </Link>
-                                        </Disclosure.Button>
-                                        {/* PHÂN QUYỀN */}
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="hidden md:block">
-                                <div className="ml-4 flex items-center md:ml-6">
-                                    {/* NÚT THÔNG BÁO */}
+                                {navLinks.map((item) => (
                                     <Disclosure.Button
-                                        type="button"
-                                        className="relative rounded-full bg-blue-600 p-1 text-white hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                    >
-                                        <span className="absolute -inset-1.5" />
-                                        <span className="sr-only">Xem thông báo</span>
-                                        <BellIcon className="h-6 w-6" aria-hidden="true" />
-                                    </Disclosure.Button>
-                                    {/* MENU MỞ XUỐNG */}
-                                    <Transition
-                                        as={Fragment}
-                                        enter="transition ease-out duration-100"
-                                        enterFrom="transform opacity-0 scale-95"
-                                        enterTo="transform opacity-100 scale-100"
-                                        leave="transition ease-in duration-75"
-                                        leaveFrom="transform opacity-100 scale-100"
-                                        leaveTo="transform opacity-0 scale-95"
-                                    >
-                                        <Menu as="div" className="relative ml-3">
-                                            <Menu.Items as="div" className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                                {this.props.authenticated ? (
-                                                    // KHI ĐĂNG NHẬP
-                                                    <Menu.Item as="div">
-                                                        <Disclosure.Button className="block px-4 py-2 text-sm text-black hover:bg-blue-500 hover:text-white">
-                                                            <Link to={"/profile"} className="block px-4 py-2 text-sm">
-                                                                Thông tin
-                                                            </Link>
-                                                        </Disclosure.Button>
-                                                        <Disclosure.Button className="block px-4 py-2 text-sm text-black hover:bg-blue-500 hover:text-white">
-                                                            <a className="block px-4 py-2 text-sm" onClick={this.props.onLogout} href='/'>Đăng xuất</a>
-                                                        </Disclosure.Button>
-                                                    </Menu.Item>
-                                                ) : (
-                                                    // KHI CHƯA ĐĂNG NHẬP
-                                                    <Menu.Item as="div">
-                                                        <Disclosure.Button className="block px-4 py-2 text-sm text-black hover:bg-blue-500 hover:text-white">
-                                                            <Link to={"/login"} className="block px-4 py-2 text-sm">
-                                                                Đăng nhập
-                                                            </Link>
-                                                        </Disclosure.Button>
-                                                        <Disclosure.Button className="block px-4 py-2 text-sm text-black hover:bg-blue-500 hover:text-white">
-                                                            <Link to={"/signup"} className="block px-4 py-2 text-sm">
-                                                                Đăng ký
-                                                            </Link>
-                                                        </Disclosure.Button>
-                                                    </Menu.Item>
-                                                )}
-                                            </Menu.Items>
-                                        </Menu>
-                                    </Transition>
-                                </div>
-                            </div>
-                            {/* PHẦN NGƯỜI DÙNG */}
-                            <div className="border-t border-gray-700 pb-3 pt-4">
-                                <div className="flex items-center px-5">
-                                    {/* ẢNH USER */}
-                                    <div className="flex flex-nowrap">
-                                    </div>
-                                    {/* NÚT THÔNG BÁO */}
-                                    <Disclosure.Button
-                                        type="button"
-                                        className="relative ml-auto flex-shrink-0 rounded-full bg-white p-1 text-black hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600"
-                                    >
-                                        <span className="absolute -inset-1.5" />
-                                        <span className="sr-only">Xem thông báo</span>
-                                        <BellIcon className="h-6 w-6" aria-hidden="true" />
-                                    </Disclosure.Button>
-                                </div>
-                                {/* CÁC NÚT KHI ẤN VÀO ẢNH NGƯỜI DÙNG */}
-                                <Menu as="div" className="relative ml-3">
-                                    <div className="ml-10 flex items-baseline space-x-4">
-                                        {/* CHUNG */}
-                                        <Disclosure.Button>
-                                            <Link to={"/"} className="text-white hover:bg-white hover:text-black rounded-md px-3 py-2 text-sm font-medium">
-                                                Trang chủ
-                                            </Link>
-                                        </Disclosure.Button>
-                                        {/* PHÂN QUYỀN */}
-                                        {this.props.authenticated ? (
-                                            // KHI ĐĂNG NHẬP
-                                            <Menu.Item as="div">
-                                                <Disclosure.Button className="block px-4 py-2 text-sm text-black hover:bg-blue-500 hover:text-white">
-                                                    <Link to={"/profile"} className="block px-4 py-2 text-sm">
-                                                        Thông tin
-                                                    </Link>
-                                                </Disclosure.Button>
-                                                <Disclosure.Button className="block px-4 py-2 text-sm text-black hover:bg-blue-500 hover:text-white">
-                                                    <a className="block px-4 py-2 text-sm" onClick={this.props.onLogout} href='/'>Đăng xuất</a>
-                                                </Disclosure.Button>
-                                            </Menu.Item>
-                                        ) : (
-                                            // KHI CHƯA ĐĂNG NHẬP
-                                            <Menu.Item as="div">
-                                                <Disclosure.Button className="block px-4 py-2 text-sm text-black hover:bg-blue-500 hover:text-white">
-                                                    <Link to={"/login"} className="block px-4 py-2 text-sm">
-                                                        Đăng nhập
-                                                    </Link>
-                                                </Disclosure.Button>
-                                                <Disclosure.Button className="block px-4 py-2 text-sm text-black hover:bg-blue-500 hover:text-white">
-                                                    <Link to={"/signup"} className="block px-4 py-2 text-sm">
-                                                        Đăng ký
-                                                    </Link>
-                                                </Disclosure.Button>
-                                            </Menu.Item>
+                                        key={item.name}
+                                        as="a"
+                                        href={item.href}
+                                        className={classNames(
+                                            item.current ? 'bg-blue-900 text-white' : 'text-gray-300 hover:bg-blue-700 hover:text-white',
+                                            'block rounded-md px-3 py-2 text-base font-medium'
                                         )}
+                                        aria-current={item.current ? 'page' : undefined}
+                                    >
+                                        {item.name}
+                                    </Disclosure.Button>
+                                ))}
+                            </div>
+                            <div className="border-t border-blue-700 pb-3 pt-4">
+                                <div className="flex items-center px-5">
+                                    <div className="flex-shrink-0">
+                                        <img className="h-10 w-10 rounded-full" src={this.props.currentUser.imageUrl} alt={this.props.currentUser.name} />
                                     </div>
-                                </Menu>
+                                    <div className="ml-3">
+                                        <div className="text-base font-medium leading-none text-white">{this.props.currentUser.name}</div>
+                                        <div className="text-sm font-medium leading-none text-blue-400">{this.props.currentUser.email}</div>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        className="relative ml-auto flex-shrink-0 rounded-full bg-blue-800 p-1 text-blue-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-800"
+                                    >
+                                        <span className="absolute -inset-1.5" />
+                                        <span className="sr-only">View notifications</span>
+                                        <BellIcon className="h-6 w-6" aria-hidden="true" />
+                                    </button>
+                                </div>
+                                <div className="mt-3 space-y-1 px-2">
+                                    {this.props.authenticated ? (
+                                        // KHI ĐĂNG NHẬP
+                                        <div className='space-y-1 px-2 pb-3 pt-2 sm:px-3'>
+                                            <Disclosure.Button as="a" href='/profile' className="text-gray-300 hover:bg-blue-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
+                                                    {this.props.currentUser.name}
+                                            </Disclosure.Button>
+                                            <Disclosure.Button as="a"  onClick={this.props.onLogout} href='/' className="text-gray-300 hover:bg-blue-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
+                                                Đăng xuất
+                                            </Disclosure.Button>
+                                        </div>
+                                    ) : (
+                                        // KHI CHƯA ĐĂNG NHẬP
+                                        <div className='space-y-1 px-2 pb-3 pt-2 sm:px-3'>
+                                            <Disclosure.Button as="a" href='/login' className="text-gray-300 hover:bg-blue-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
+                                                    Đăng nhập
+                                            </Disclosure.Button>
+                                            <Disclosure.Button as="a" href='/signup' className="text-gray-300 hover:bg-blue-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
+                                                    Đăng ký
+                                            </Disclosure.Button>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </Disclosure.Panel>
                     </>
