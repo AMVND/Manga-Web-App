@@ -58,7 +58,7 @@ export class Navbar extends Component {
                                                 <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-blue-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-800">
                                                     <span className="absolute -inset-1.5" />
                                                     <span className="sr-only">Open user menu</span>
-                                                    <img className="h-8 w-8 rounded-full" src={this.props.currentUser.imageUrl} alt={this.props.currentUser.name} />
+                                                    {this.props.authenticated ? (<img className="h-8 w-8 rounded-full" src={this.props.currentUser.imageUrl} alt={this.props.currentUser.name} /> ):(<img className="h-8 w-8 rounded-full" src={klee} alt='no_user' />)}
                                                 </Menu.Button>
                                             </div>
                                             <Transition
@@ -139,12 +139,18 @@ export class Navbar extends Component {
                             <div className="border-t border-blue-700 pb-3 pt-4">
                                 <div className="flex items-center px-5">
                                     <div className="flex-shrink-0">
-                                        <img className="h-10 w-10 rounded-full" src={this.props.currentUser.imageUrl} alt={this.props.currentUser.name} />
+                                    {this.props.authenticated ? (<img className="h-8 w-8 rounded-full" src={this.props.currentUser.imageUrl} alt={this.props.currentUser.name} /> ):(<img className="h-8 w-8 rounded-full" src={klee} alt='no_user' />)}
                                     </div>
+                                    {this.props.authenticated ? (
                                     <div className="ml-3">
                                         <div className="text-base font-medium leading-none text-white">{this.props.currentUser.name}</div>
                                         <div className="text-sm font-medium leading-none text-blue-400">{this.props.currentUser.email}</div>
+                                    </div>):(
+                                        <div className="ml-3">
+                                        <div className="text-base font-medium leading-none text-white">Username</div>
+                                        <div className="text-sm font-medium leading-none text-blue-400">Email</div>
                                     </div>
+                                    )}
                                     <button
                                         type="button"
                                         className="relative ml-auto flex-shrink-0 rounded-full bg-blue-800 p-1 text-blue-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-800"
