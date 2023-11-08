@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ACCESS_TOKEN } from '../../constants';
 import { Redirect } from 'react-router-dom'
+import Navbar from '../../common/Navbar';
 
 export default class OAuth2RedirectHandler extends Component {
     getUrlParameter(name) {
@@ -17,6 +18,7 @@ export default class OAuth2RedirectHandler extends Component {
 
         if(token) {
             localStorage.setItem(ACCESS_TOKEN, token);
+            <Navbar/>
             return <Redirect to={{
                 pathname: "/profile",
                 state: { from: this.props.location }

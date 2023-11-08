@@ -5,6 +5,11 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import klee from '../img/klee_icon.png'
 
 export class Navbar extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <Disclosure as="nav" className="bg-blue-500 sticky top-0">
@@ -15,9 +20,9 @@ export class Navbar extends Component {
                                 <div className="flex items-center">
                                     {/* LOGO */}
                                     <div className="flex items-center  justify-center flex-shrink-0">
-                                    <img src={klee} alt='logo' className='h-14'/>  
-                                    <Link to="/" className='text-white font-bold'>                                   
-                                        Wibu Corner</Link>
+                                        <img src={klee} alt='logo' className='h-14' />
+                                        <Link to="/" className='text-white font-bold'>
+                                            Wibu Corner</Link>
                                     </div>
                                     {/* ẨN KHI Ở MOBILE */}
                                     <div className="hidden md:block">
@@ -52,7 +57,16 @@ export class Navbar extends Component {
                                                 <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                                                     <span className="absolute -inset-1.5" />
                                                     <span className="sr-only">Open user menu</span>
-                                                    <img className="h-8 w-8 rounded-full bg-slate-200" alt="user_pic" src="" />
+                                                    {
+                                                        this.props.currentUser.imageUrl ? (
+                                                            <img src={this.props.currentUser.imageUrl} alt={this.props.currentUser.name} className="h-8 w-8 rounded-full bg-slate-200" />
+                                                        ) : (
+                                                            <div className="text-avatar">
+                                                                <span>{this.props.currentUser.name && this.props.currentUser.name[0]}</span>
+                                                            </div>
+                                                        )
+                                                    }
+
                                                 </Menu.Button>
                                             </div>
                                             <Transition

@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { GOOGLE_AUTH_URL, ACCESS_TOKEN } from '../../constants/index';
-// import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, GITHUB_AUTH_URL, ACCESS_TOKEN } from '../../constants';
 import { login } from '../../util/APIUtils';
 import { Redirect } from 'react-router-dom'
 import googleLogo from '../../img/google-logo.png';
-// import fbLogo from '../../img/fb-logo.png';
-// import githubLogo from '../../img/github-logo.png';
 
 
 export class Login extends Component {
@@ -59,10 +56,6 @@ class SocialLogin extends Component {
                     <img className="h-5" src={googleLogo} alt="Google" /> 
                     Đăng nhập bằng Google
                 </a>
-                {/* <a className="btn btn-block social-btn facebook" href={FACEBOOK_AUTH_URL}>
-                    <img src={fbLogo} alt="Facebook" /> Sign up with Facebook</a>
-                <a className="btn btn-block social-btn github" href={GITHUB_AUTH_URL}>
-                    <img src={githubLogo} alt="Github" /> Sign up with Github</a> */}
             </div>
         );
     }
@@ -119,11 +112,11 @@ class LoginForm extends Component {
                     <hr className="h-0 border-b border-solid border-grey-500 grow" />
                 </div>
                 <label htmlFor="email" className="mb-2 text-sm text-start text-grey-900">Email</label>
-                <input id="email" type="email" placeholder="mail@gmail.com"
+                <input id="email" type="email" placeholder="mail@gmail.com" name='email'
                     value={this.state.email} onChange={this.handleInputChange}
                     className="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl" />
                 <label htmlFor="password" className="mb-2 text-sm text-start text-grey-900">Mật khẩu</label>
-                <input id="password" type="password" placeholder="Nhập mật khẩu"
+                <input id="password" type="password" placeholder="Nhập mật khẩu" name='password'
                     value={this.state.password} onChange={this.handleInputChange}
                     className="flex items-center w-full px-5 py-4 mb-5 mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl" />
                 <div className="flex flex-row justify-between mb-8">
