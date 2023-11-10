@@ -6,5 +6,5 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [require("./src/pages/breadcum/BreadCumPlugin")],
+  plugins: [],
 }

@@ -3,6 +3,7 @@ import FeaturedBar from './featured/FeaturedBar';
 import LastestBar from './lastest/LastestBar';
 import FollowSideBar from './followed/FollowSideBar';
 import BreadCrumbs from './breadcrumbs/BreadCrumbs';
+import MangaDetails from '../manga/MangaDetails';
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
           <LastestBar/>
           {/* <LastestBar/> */}
           {/* TRUYỆN ĐỂ Ở ĐÂY */}
+          <MangaDetails />
         </div>
       </div>
     </div>
