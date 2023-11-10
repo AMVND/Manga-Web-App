@@ -2,17 +2,23 @@ import React from 'react'
 import FeaturedBar from './featured/FeaturedBar';
 import LastestBar from './lastest/LastestBar';
 import FollowSideBar from './followed/FollowSideBar';
-import BreadCums from './BreadCums';
+import BreadCrumbs from './breadcrumbs/BreadCrumbs';
 
 export default function Home() {
   return (
-    <div className="h-full bg-gray-200 p-8">
-      <div className="bg-white rounded-lg shadow-xl pb-8">
-        <BreadCums/>
-        <FeaturedBar/>
-        <LastestBar/>
+    <div className="h-full bg-gray-200 p-2">
+      {/* <BreadCums/> */}
+      <BreadCrumbs/>
+      <div className="bg-white rounded-lg shadow-xl pb-4">
+        {/* <FollowSideBar/> */}
         <FollowSideBar/>
-        {/* TRUYỆN ĐỂ Ở ĐÂY */}
+        <div>
+          <FeaturedBar/>
+          {/* <FeaturedBar/> */}
+          <LastestBar/>
+          {/* <LastestBar/> */}
+          {/* TRUYỆN ĐỂ Ở ĐÂY */}
+        </div>
       </div>
     </div>
   )
