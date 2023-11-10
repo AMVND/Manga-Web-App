@@ -1,13 +1,15 @@
 import React from 'react'
+import klee_cry from '../assests/img/klee_cry.png';
 
 export default function NotFound() {
     return (
         <>
-            <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+            <main className="grid min-h-full place-items-center bg-white py-24 sm:py-32 lg:px-8">
                 <div className="text-center">
                     <p className="text-base font-semibold text-blue-600">404</p>
                     <h1 className="mt-4 text-3xl font-bold tracking-tight text-blue-900 sm:text-5xl">Không tìm thấy trang</h1>
                     <p className="mt-6 text-base leading-7 text-blue-600">Xin lỗi chúng tôi không thể tìm được trang web mà bạn cần.</p>
+                    <img src={klee_cry} alt='Notthing' className="h-48 inline-block align-middle"/>
                     <div className="mt-10 flex items-center justify-center gap-x-6">
                         <a
                             href="/"

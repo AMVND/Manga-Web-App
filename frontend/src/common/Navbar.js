@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { navLinks } from '../constants/Navigation';
-import klee from '../img/klee_icon.png'
+import klee from '../assests/img/klee_icon.png'
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -20,7 +20,7 @@ export class Navbar extends Component {
                                 <div className="flex items-center">
                                     <div className="flex items-center justify-center flex-shrink-0">
                                         <img src={klee} alt='logo' className='h-14' />
-                                        <Link to="/" className='text-white font-bold'>Wibu Corner</Link>
+                                        <Link to="/" className='text-2xl text-base/6 text-white font-bold subpixel-antialiased'>WIBU CORNER</Link>
                                     </div>
                                     <div className="hidden md:block">
                                         <div className="ml-10 flex items-baseline space-x-4">

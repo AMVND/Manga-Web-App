@@ -5,6 +5,7 @@ import Navbar from '../../common/Navbar';
 
 export default class OAuth2RedirectHandler extends Component {
     getUrlParameter(name) {
+        // eslint-disable-next-line
         name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
         var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
 

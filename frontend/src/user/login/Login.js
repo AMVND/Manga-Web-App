@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { GOOGLE_AUTH_URL, ACCESS_TOKEN } from '../../constants/index';
 import { login } from '../../util/APIUtils';
 import { Redirect } from 'react-router-dom'
-import googleLogo from '../../img/google-logo.png';
+import googleLogo from '../../assests/img/google-logo.png';
 
 
 export class Login extends Component {
