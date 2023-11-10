@@ -2,11 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { navLinks } from '../util/Navigation';
+import { navLinks } from '../constants/Navigation';
 import klee from '../img/klee_icon.png'
-import { Collapse, Dropdown, initTE } from "tw-elements";
-  
-  initTE({ Collapse, Dropdown });
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
