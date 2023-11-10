@@ -14,23 +14,13 @@ export const navLinks = [
       current: false
     },
     {
-      name: "Lịch sử",
-      href: "/history",
-      current: false
-    },
-    {
       name: "Thể loại",
-      href: "/type",
+      href: "/genres",
       current: false
     },
     {
       name: "Tìm truyện",
       href: "/search",
-      current: false
-    },
-    {
-      name: "Group",
-      href: "/group",
       current: false
     },
     {
