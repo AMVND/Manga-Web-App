@@ -3,42 +3,45 @@ import axios from 'axios';
 require('dotenv').config(); // Load environment variables
 
 const MangaDetails = () => {
-    const apiKey = process.env.REACT_APP_MANGADEX_API_KEY; // Use environment variable
-    const apiUrl = 'https://api.mangadex.org/manga';
+  const apiKey = process.env.REACT_APP_MANGADEX_API_KEY; // Replace with your MangaDex API key
+  const popularNewTitlesUrl = 'https://api.mangadex.org/';
 
-  const [mangaList, setMangaList] = useState(null);
+  const [popularNewTitles, setPopularNewTitles] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchPopularNewTitles = async () => {
       try {
-        const response = await axios.get(apiUrl, {
+        const response = await axios.get(popularNewTitlesUrl, {
           headers: { 'Authorization': `Bearer ${apiKey}` },
+          params: {
+            order: 'popularity',
+            limit: 10, // You can adjust the limit based on your requirements
+          },
         });
-        setMangaList(response.data.data);
+        setPopularNewTitles(response.data.data);
       } catch (error) {
-        console.error('Error fetching manga list:', error);
+        console.error('Error fetching popular new titles:', error);
       }
     };
 
-    fetchData();
-  }, [apiUrl, apiKey]);
+    fetchPopularNewTitles();
+  }, [popularNewTitlesUrl, apiKey]);
 
-  if (!mangaList) {
+  if (popularNewTitles.length === 0) {
     return <p>Loading...</p>;
   }
 
-  // Display the list of manga or use it as needed
   return (
     <div>
-      <h1>Manga List</h1>
-      <ul>
-        {mangaList.map(manga => (
-          <li key={manga.id}>
-            {manga.attributes.title.en}
-            {/* Add more details or links to individual manga pages */}
-          </li>
+      <h1>Popular New Titles</h1>
+      <div>
+        {popularNewTitles.map((manga) => (
+          <div key={manga.id}>
+            <h2>{manga.attributes.title.en}</h2>
+            {/* Add more details as needed */}
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
