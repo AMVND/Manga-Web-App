@@ -31,7 +31,7 @@ export class Navbar extends Component {
                                                     as="a"
                                                     href={item.href}
                                                     className={classNames(
-                                                        item.current ? 'bg-blue-900 text-white' : 'text-gray-300 hover:bg-blue-700 hover:text-white',
+                                                        item.current ? 'bg-blue-900 text-white' : 'text-white hover:bg-blue-700 hover:text-white',
                                                         'block rounded-md px-3 py-2 text-base font-medium'
                                                     )}
                                                     aria-current={item.current ? 'page' : undefined}
@@ -46,7 +46,7 @@ export class Navbar extends Component {
                                     <div className="ml-4 flex items-center md:ml-6">
                                         <button
                                             type="button"
-                                            className="relative rounded-full bg-blue-800 p-1 text-blue-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-800"
+                                            className="relative rounded-full bg-blue-800 p-1 text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-800"
                                         >
                                             <span className="absolute -inset-1.5" />
                                             <span className="sr-only">Xem thông báo</span>
@@ -128,7 +128,7 @@ export class Navbar extends Component {
                                         as="a"
                                         href={item.href}
                                         className={classNames(
-                                            item.current ? 'bg-blue-900 text-white' : 'text-gray-300 hover:bg-blue-700 hover:text-white',
+                                            item.current ? 'bg-blue-900 text-white' : 'text-white hover:bg-blue-700 hover:text-white',
                                             'block rounded-md px-3 py-2 text-base font-medium'
                                         )}
                                         aria-current={item.current ? 'page' : undefined}
@@ -154,7 +154,7 @@ export class Navbar extends Component {
                                     )}
                                     <button
                                         type="button"
-                                        className="relative ml-auto flex-shrink-0 rounded-full bg-blue-800 p-1 text-blue-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-800"
+                                        className="relative ml-auto flex-shrink-0 rounded-full bg-blue-800 p-1 text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-800"
                                     >
                                         <span className="absolute -inset-1.5" />
                                         <span className="sr-only">View notifications</span>

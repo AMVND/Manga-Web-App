@@ -4,7 +4,7 @@ import read from '../assests/svg/Manga/book.svg';
 
 require("dotenv").config(); // Load environment variables
 
-const MangaDetails = () => {
+const MangaList = () => {
   const [mangaList, setMangaList] = useState([]);
 
   useEffect(() => {
@@ -12,10 +12,11 @@ const MangaDetails = () => {
       try {
         const response = await axios.get("https://api.mangadex.org/manga", {
           params: {
-            limit: 1, // Adjust the limit as needed
+            limit: 12, // Adjust the limit as needed
           },
+          
         });
-
+        
         setMangaList(response.data.data);
       } catch (error) {
         console.error("Error fetching manga:", error);
@@ -28,20 +29,21 @@ const MangaDetails = () => {
   return (
     <div className="container px-4">
       <h1>MANGA LIST</h1>
-      <div className="container px-4">
+      <div className="container grid  grid-cols-4 px-4 gap-12 justify-evenly content-evenly ">
         {mangaList.map((manga) => (
-          <div key={manga.id} className="h-48">
+          <div key={manga.id} className="m-2 max-h-96">
             <br />
-            <img src={read} alt="Manga_cover"/>
+            <img src={read} alt="Manga_cover" className="justify-evenly content-evenly"/>
             <br />
             <h2>{manga.attributes.title.en}</h2>
              {/* Add more details as needed */}
-            <div className="w-full text-xs text-justify text-eclisie">
-              <div>
-              {manga.attributes.description.en}
-              </div>
+            <div className="w-96 text-xs text-justify">
+                {/* Convert tags object to a comma-separated string */}
+              <p>
+                Chapter: {manga.attributes.lastChapter}
+              </p>
                 <a
-                  className="flex items-center justify-center py-2 w-28 sm:px-0 mt-2 mb-4 text-sm 
+                  className="flex items-center justify-center py-3 w-28 sm:px-0 text-sm 
                 font-medium transition duration-300 rounded-2xl text-grey-900 bg-grey-300 
                 hover:bg-grey-400 focus:ring-4 focus:ring-grey-300"
                   href={manga.attributes.links.raw}
@@ -56,21 +58,6 @@ const MangaDetails = () => {
                   Đọc truyện
                 </a>
             </div>
-            <div>
-              {/* Convert tags object to a comma-separated string */}
-              <p>
-                Thể loại:{" "}
-                {manga.attributes.tags
-                  .map((tag) => tag.attributes.name.en)
-                  .join(", ")}
-              </p>
-              <p>
-                Chapter mới nhất: {manga.attributes.lastChapter} <br />
-                Cập nhật lúc: {manga.attributes.updatedAt}
-              </p>
-              <p>Trạng thái: {manga.attributes.state}</p>
-              <p>Năm: {manga.attributes.year}</p>
-            </div>
             <br />
             <hr />
           </div>
@@ -80,4 +67,4 @@ const MangaDetails = () => {
   );
 };
 
-export default MangaDetails;
+export default MangaList;

@@ -1,9 +1,9 @@
 import React from 'react'
-import "./tailwind.css"
+
 
 export default function BreadCrumbs() {
   return (
-    <div className=" px-4 mb-2 w-full bg-white rounded-lg shadow-xl ">
+    <div className=" px-4 mb-2 w-full">
       <div className="border-b border-stroke py-4 dark:border-dark-3 md:py-5">
         <ul className="flex items-center">
           <li className="flex items-center">
