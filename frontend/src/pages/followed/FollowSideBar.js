@@ -5,14 +5,14 @@ export default function FollowSideBar() {
     <div className="h-full rounded-lg bg-gray-200 px-4">
       <div className="px-0 pt-4">
         <div className="flex flex-wrap">
-          <div className="px-4 rounded-lg shadow-xl bg-white">
+          <div className="px-4 rounded-lg shadow-xl bg-white w-full">
             <div className="flex flex-row space-x-3">
             <img src={read} alt="read" className="h-12 w-12 my-5" />
               <div className="flex flex-col space-y-1">
               <h3 className="mt-4">
                   <a
                     href="/"
-                    className="text-xl sm:text-sx sm:truncate font-semibold text-dark hover:text-primary dark:text-white sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px]"
+                    className="font-semibold text-dark hover:text-primary dark:text-white text-lg truncate"
                   >
                     Tên của truyện dài vcl ra
                   </a>

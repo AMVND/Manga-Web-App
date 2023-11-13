@@ -27,31 +27,31 @@ const MangaList = () => {
   }, []);
 
   return (
-    <div className="container px-4">
+    <div className="container px-2 md:px-4">
       <h1>MANGA LIST</h1>
-      <div className="container grid  grid-cols-4 px-4 gap-12 justify-evenly content-evenly ">
+      <div className="container grid grid-cols-2 md:grid-cols-4 grid-flow-dense px-2 md:px-4 gap-4 md:gap-12 justify-evenly content-evenly inline-block align-middle  ">
         {mangaList.map((manga) => (
-          <div key={manga.id} className="m-2 max-h-96">
+          <div key={manga.id} className="m-2 max-h-48 md:max-h-96">
             <br />
             <img src={read} alt="Manga_cover" className="justify-evenly content-evenly"/>
             <br />
-            <h2>{manga.attributes.title.en}</h2>
+            <h2 className="text-sm/[17px] font-bold truncate line-clamp-3" >{manga.attributes.title.en}</h2>
              {/* Add more details as needed */}
-            <div className="w-96 text-xs text-justify">
+            <div className="w-96 text-xs text-justify pt-2">
                 {/* Convert tags object to a comma-separated string */}
-              <p>
+              <p className="pb-4">
                 Chapter: {manga.attributes.lastChapter}
               </p>
                 <a
-                  className="flex items-center justify-center py-3 w-28 sm:px-0 text-sm 
+                  className="flex items-center justify-center py-1 w-28 sm:px-0 text-xs/[17px]
                 font-medium transition duration-300 rounded-2xl text-grey-900 bg-grey-300 
-                hover:bg-grey-400 focus:ring-4 focus:ring-grey-300"
+                hover:bg-blue-500 hover:text-white focus:ring-4 focus:ring-grey-300"
                   href={manga.attributes.links.raw}
                   target="_blank"
                   rel="noopener noreferrer"
                 > 
                   <img
-                    className="h-5"
+                    className="h-5 pr-2"
                     src={read}
                     alt={manga.attributes.links.raw}
                   />

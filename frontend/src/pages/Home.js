@@ -8,7 +8,7 @@ import MangaList from "../manga/MangaList";
 export default function Home() {
   return (
     <div className="h-full bg-gray-200 p-2">
-      <div className=" m-auto grid gap-4 grid-cols-4 bg-white rounded-lg shadow-xl pt-6 px-8 ">
+      <div className=" m-auto grid gap-4 grid-cols-4 flex flex-wrap bg-white rounded-lg shadow-xl pt-6 px-8 ">
         <div className="m-auto grid col-span-3">
           {/* <BreadCums/> */}
           <BreadCrumbs />
