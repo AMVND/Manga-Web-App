@@ -7,25 +7,23 @@ import MangaList from "../manga/MangaList";
 
 export default function Home() {
   return (
-    <div className="h-full bg-gray-200 p-2">
-      <div className=" m-auto grid gap-4 grid-cols-4 flex flex-wrap bg-white rounded-lg shadow-xl pt-6 px-8 ">
-        <div className="m-auto grid col-span-3">
-          {/* <BreadCums/> */}
-          <BreadCrumbs />
+    <div className="container my-6 mx-auto px-2 md:px-8 ">
+      {/* <BreadCums/> */}
+      <BreadCrumbs />
 
-          {/* <FeaturedBar/> */}
-          <FeaturedBar />
+      {/* <FeaturedBar/> */}
+      <FeaturedBar />
 
-          {/* <LastestBar/> */}
-          <LastestBar />
-
-          {/* TRUYỆN ĐỂ Ở ĐÂY */}
-          <MangaList />
-        </div>
-
-        <div className="grid row-span-2">
+      {/* <LastestBar/> */}
+      <LastestBar />
+      <div className=" flex flex-wrap flex-col lg:flex-row-reverse -mx-1 lg:-mx-1 my-1 px-2 w-full overflow-hidden rounded-lg shadow-lg">
+        <div className="w-full lg:w-1/4">
           {/* <FollowSideBar/> */}
           <FollowSideBar />
+        </div>
+        <div className="w-full lg:w-3/4">
+          {/* TRUYỆN ĐỂ Ở ĐÂY */}
+          <MangaList />
         </div>
       </div>
     </div>

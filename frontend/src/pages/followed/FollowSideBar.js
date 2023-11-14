@@ -2,17 +2,17 @@ import React from "react";
 import read from "../../assests/svg/Manga/book.svg";
 export default function FollowSideBar() {
   return (
-    <div className="h-full rounded-lg bg-gray-200 px-4">
-      <div className="px-0 pt-4">
+    <div className="h-48 lg:h-full rounded-lg bg-gray-200 px-0 lg:px-4">
+      <div className="px-0 pt-1 lg:pt-4">
         <div className="flex flex-wrap">
-          <div className="px-4 rounded-lg shadow-xl bg-white w-full">
+          <div className="px-4 rounded-lg shadow-xl bg-white min-w-full lg:min-w-full">
             <div className="flex flex-row space-x-3">
-            <img src={read} alt="read" className="h-12 w-12 my-5" />
+              <img src={read} alt="read" className="h-6 lg:h-12 w-6 lg:w-12 my-5" />
               <div className="flex flex-col space-y-1">
-              <h3 className="mt-4">
+                <h3 className="mt-1 lg:mt-4">
                   <a
                     href="/"
-                    className="font-semibold text-dark hover:text-primary dark:text-white text-lg truncate"
+                    className="font-semibold text-dark hover:text-primary dark:text-white text-sm lg:text-lg truncate"
                   >
                     Tên của truyện dài vcl ra
                   </a>

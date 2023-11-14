@@ -27,23 +27,26 @@ const MangaList = () => {
   }, []);
 
   return (
-    <div className="container px-2 md:px-4">
+    <div className="container my-6 mx-auto px-2 md:px-8">
       <h1>MANGA LIST</h1>
-      <div className="container grid grid-cols-2 md:grid-cols-4 grid-flow-dense px-2 md:px-4 gap-4 md:gap-12 justify-evenly content-evenly inline-block align-middle  ">
+      <div className="flex flex-wrap -mx-1 lg:-mx-1 ">
+      {/* container grid grid-cols-2 md:grid-cols-4 grid-flow-dense px-2 md:px-4 gap-4 md:gap-12 justify-evenly content-evenly inline-block align-middle   */}
         {mangaList.map((manga) => (
-          <div key={manga.id} className="m-2 max-h-48 md:max-h-96">
+          <div key={manga.id} className=" my-1 px-2 w-full w-1/2 lg:my-2 lg:px-4 lg:w-1/4 overflow-hidden rounded-lg shadow-lg">
             <br />
-            <img src={read} alt="Manga_cover" className="justify-evenly content-evenly"/>
+            <img src={read} alt="Manga_cover" className="block h-32 w-full  ease-in-out duration-300 hover:scale-150"/>
             <br />
-            <h2 className="text-sm/[17px] font-bold truncate line-clamp-3" >{manga.attributes.title.en}</h2>
+            <h2 className="flex items-center justify-between leading-tight p-2 md:p-4 text-lg truncate hover:text-blue-600" >{manga.attributes.title.en}</h2>
+            {/* text-sm/[17px] font-bold truncate line-clamp-3 */}
              {/* Add more details as needed */}
-            <div className="w-96 text-xs text-justify pt-2">
+            <div className="flex items-center justify-between leading-none md:p-4 ml-0 text-sm">
                 {/* Convert tags object to a comma-separated string */}
-              <p className="pb-4">
+              <p className="pb-2 text-grey-darker text-sm">
                 Chapter: {manga.attributes.lastChapter}
               </p>
+              <p className="pb-2">
                 <a
-                  className="flex items-center justify-center py-1 w-28 sm:px-0 text-xs/[17px]
+                  className="flex items-center justify-center py-1 w-24 sm:px-0 text-xs/[17px]
                 font-medium transition duration-300 rounded-2xl text-grey-900 bg-grey-300 
                 hover:bg-blue-500 hover:text-white focus:ring-4 focus:ring-grey-300"
                   href={manga.attributes.links.raw}
@@ -51,15 +54,15 @@ const MangaList = () => {
                   rel="noopener noreferrer"
                 > 
                   <img
-                    className="h-5 pr-2"
+                    className="h-5 pr-1"
                     src={read}
                     alt={manga.attributes.links.raw}
                   />
                   Đọc truyện
                 </a>
+                </p>
             </div>
             <br />
-            <hr />
           </div>
         ))}
       </div>
