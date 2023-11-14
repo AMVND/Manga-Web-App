@@ -7,7 +7,7 @@ import MangaList from "../manga/MangaList";
 
 export default function Home() {
   return (
-    <div className="container my-6 mx-auto px-2 md:px-8 ">
+    <div className="container my-6 mx-auto px-2 md:px-8 rounded-lg">
       {/* <BreadCums/> */}
       <BreadCrumbs />
 
@@ -21,7 +21,7 @@ export default function Home() {
           {/* <FollowSideBar/> */}
           <FollowSideBar />
         </div>
-        <div className="w-full lg:w-3/4">
+        <div className="w-full lg:w-3/4 ">
           {/* TRUYỆN ĐỂ Ở ĐÂY */}
           <MangaList />
         </div>

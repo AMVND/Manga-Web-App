@@ -30,14 +30,12 @@ const MangaList = () => {
     <div className="container my-6 mx-auto px-2 md:px-8">
       <h1>MANGA LIST</h1>
       <div className="flex flex-wrap -mx-1 lg:-mx-1 ">
-      {/* container grid grid-cols-2 md:grid-cols-4 grid-flow-dense px-2 md:px-4 gap-4 md:gap-12 justify-evenly content-evenly inline-block align-middle   */}
         {mangaList.map((manga) => (
           <div key={manga.id} className=" my-1 px-2 w-full w-1/2 lg:my-2 lg:px-4 lg:w-1/4 overflow-hidden rounded-lg shadow-lg">
             <br />
             <img src={read} alt="Manga_cover" className="block h-32 w-full  ease-in-out duration-300 hover:scale-150"/>
             <br />
             <h2 className="flex items-center justify-between leading-tight p-2 md:p-4 text-lg truncate hover:text-blue-600" >{manga.attributes.title.en}</h2>
-            {/* text-sm/[17px] font-bold truncate line-clamp-3 */}
              {/* Add more details as needed */}
             <div className="flex items-center justify-between leading-none md:p-4 ml-0 text-sm">
                 {/* Convert tags object to a comma-separated string */}
