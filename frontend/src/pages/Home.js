@@ -11,8 +11,10 @@ export default function Home() {
       {/* <BreadCums/> */}
       <BreadCrumbs />
 
-      {/* <FeaturedBar/> */}
-      <FeaturedBar />
+      <div className="w-full">
+        {/* <FeaturedBar/> */}
+        <FeaturedBar />
+      </div>
 
       {/* <LastestBar/> */}
       <LastestBar />
