@@ -1,80 +1,160 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import read from '../assests/svg/Manga/book.svg';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-require("dotenv").config(); // Load environment variables
+const MangaDetails = ({ match }) => {
+  const [mangaDetails, setMangaDetails] = useState(null);
+  const [coverImageUrl, setCoverImageUrl] = useState(null);
 
-const MangaDetails = () => {
-  const [mangaList, setMangaList] = useState([]);
+  const fetchCoverImage = async (manga) => {
+    const coverId = getRelationshipId(manga, 'cover_art');
+
+    if (coverId) {
+      try {
+        const coverResponse = await axios.get(`https://api.mangadex.org/cover/${coverId}`);
+        const coverData = coverResponse.data.data;
+
+        const imageSize = '256p'; // Change this to the desired size ('256p', '512p', etc.)
+        const imageUrl = coverData
+          ? `https://uploads.mangadex.org/covers/${manga.id}/${coverData.attributes.fileName}?size=${imageSize}`
+          : null;
+
+        setCoverImageUrl(imageUrl);
+      } catch (error) {
+        console.error('Error fetching cover details:', error);
+      }
+    }
+  };
+
+  const getRelationshipId = (resource, relationshipType) => {
+    const relationships = resource.relationships || [];
+    const relationship = relationships.find((rel) => rel.type === relationshipType);
+    return relationship ? relationship.id : null;
+  };
 
   useEffect(() => {
-    const fetchManga = async () => {
+    const fetchMangaDetails = async () => {
       try {
-        const response = await axios.get("https://api.mangadex.org/manga", {
-          params: {
-            limit: 1, // Adjust the limit as needed
-          },
-        });
+        const mangaId = match.params.mangaId;
+        const mangaResponse = await axios.get(`https://api.mangadex.org/manga/${mangaId}`);
+        const manga = mangaResponse.data.data;
 
-        setMangaList(response.data.data);
+        setMangaDetails(manga);
+
+        fetchCoverImage(manga);
+
       } catch (error) {
-        console.error("Error fetching manga:", error);
+        console.error('Error fetching manga details:', error);
       }
     };
 
-    fetchManga();
-  }, []);
+    fetchMangaDetails();
+  }, [match.params.mangaId]);
 
   return (
-    <div className="container px-4">
-      <h1>MANGA LIST</h1>
-      <div className="container px-4">
-        {mangaList.map((manga) => (
-          <div key={manga.id} className="h-48">
-            <br />
-            <img src={read} alt="Manga_cover"/>
-            <br />
-            <h2>{manga.attributes.title.en}</h2>
-             {/* Add more details as needed */}
-            <div className="w-full text-xs text-justify text-eclisie">
-              <div>
-              {manga.attributes.description.en}
+    <div className="relative">
+      {/* Blurry background image */}
+      <img
+        src={coverImageUrl}
+        alt={`Cover for ${mangaDetails?.attributes?.title?.en || 'No Title'}`}
+        className="w-full h-10vh sm:h-full object-cover blur-sm absolute inset-0 z-0"
+      />
+
+      <div className="container mx-auto mt-8 flex flex-col sm:flex-row relative z-10">
+        {/* Left side with medium-sized cover image */}
+        <div className=" w-1/2 lg:w-full h-400 sm:h-auto relative mb-0 lg:mb-4">
+          <img
+            src={coverImageUrl}
+            alt={`Cover for ${mangaDetails?.attributes?.title?.en || 'No Title'}`}
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* Right side with details and overlay */}
+        <div className=" container w-full sm:w-2/3 mt-8 ml-0 sm:ml-8 text-blue-800 relative">
+          {/* Semi-transparent overlay */}
+          <h1 className="text-4xl font-bold mb-4">
+            {mangaDetails?.attributes?.title?.en || 'No Title'}
+          </h1>
+          <p className="text-lg mb-4">
+            {mangaDetails?.attributes?.description?.en || 'No description available'}
+          </p>
+
+          {/* Additional Information */}
+          {mangaDetails?.attributes && (
+            <>
+              {/* Additional Information */}
+              <div className="mb-4">
+                <p className="text-black font-bold">Original Language:</p>
+                <p>{mangaDetails.attributes.originalLanguage || 'Unknown'}</p>
               </div>
+
+              <div className="mb-4">
+                <p className="text-black font-bold">Last Volume:</p>
+                <p>{mangaDetails.attributes.lastVolume || 'Unknown'}</p>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-black font-bold">Last Chapter:</p>
+                <p>{mangaDetails.attributes.lastChapter || 'Unknown'}</p>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-black font-bold">Publication Demographic:</p>
+                <p>{mangaDetails.attributes.publicationDemographic || 'Unknown'}</p>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-black font-bold">Status:</p>
+                <p>{mangaDetails.attributes.status || 'Unknown'}</p>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-black font-bold">Year:</p>
+                <p>{mangaDetails.attributes.year || 'Unknown'}</p>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-black font-bold">Content Rating:</p>
+                <p>{mangaDetails.attributes.contentRating || 'Unknown'}</p>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-black font-bold">Chapter Numbers Reset on New Volume:</p>
+                <p>{mangaDetails.attributes.chapterNumbersResetOnNewVolume ? 'Yes' : 'No'}</p>
+              </div>
+
+              {/* Button to read the latest chapter */}
+              {mangaDetails?.attributes?.latestUploadedChapter && (
                 <a
-                  className="flex items-center justify-center py-2 w-28 sm:px-0 mt-2 mb-4 text-sm 
-                font-medium transition duration-300 rounded-2xl text-grey-900 bg-grey-300 
-                hover:bg-grey-400 focus:ring-4 focus:ring-grey-300"
-                  href={manga.attributes.links.raw}
-                  target="_blank"
+                  href={`/chapter/${mangaDetails.attributes.latestUploadedChapter}`}
+                  className="text-white bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded-md inline-block"
                   rel="noopener noreferrer"
-                > 
-                  <img
-                    className="h-5"
-                    src={read}
-                    alt={manga.attributes.links.raw}
-                  />
-                  Đọc truyện
+                >
+                  Read Latest Chapter
                 </a>
+              )}
+            </>
+          )}
+
+          {/* Tags */}
+          {mangaDetails?.attributes?.tags && (
+            <div className="mb-4">
+              <p className="text-white font-semibold">Tags:</p>
+              <div className="flex flex-wrap">
+                {mangaDetails.attributes.tags.map((tag) => (
+                  <span
+                    key={tag.id}
+                    className="text-white bg-gray-600 p-2 m-1 rounded-lg text-lg"
+                  >
+                    {tag.attributes.name.en}
+                  </span>
+                ))}
+              </div>
             </div>
-            <div>
-              {/* Convert tags object to a comma-separated string */}
-              <p>
-                Thể loại:{" "}
-                {manga.attributes.tags
-                  .map((tag) => tag.attributes.name.en)
-                  .join(", ")}
-              </p>
-              <p>
-                Chapter mới nhất: {manga.attributes.lastChapter} <br />
-                Cập nhật lúc: {manga.attributes.updatedAt}
-              </p>
-              <p>Trạng thái: {manga.attributes.state}</p>
-              <p>Năm: {manga.attributes.year}</p>
-            </div>
-            <br />
-            <hr />
-          </div>
-        ))}
+          )}
+
+        </div>
+        <div className="bg-white w-full absolute inset-0 -z-50 mt-48"></div>
       </div>
     </div>
   );

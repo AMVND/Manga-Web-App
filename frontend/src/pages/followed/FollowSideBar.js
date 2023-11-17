@@ -104,7 +104,7 @@ const FollowSideBar = () => {
 
                 <div className="flex flex-col space-y-1">
                   <div className="flex items-center justify-between leading-tight p-2 md:p-4">
-                    <h2 className="text-lg overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-blue-600">
+                    <h2 className="text-lg overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-blue-600 truncate">
                       {manga.title}
                     </h2>
                   </div>

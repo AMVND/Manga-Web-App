@@ -11,6 +11,7 @@ import LoadinIndicator from '../common/LoadinIndicator';
 import { getCurrentUser } from '../util/APIUtils';
 import { ACCESS_TOKEN } from '../constants/index';
 import PrivateRoute from '../common/PrivateRoute';
+import MangaDetails from '../manga/MangaDetails';
 
 export class App extends Component {
   constructor(props) {
@@ -65,6 +66,7 @@ export class App extends Component {
         <div className="flex items-center justify-center w-full px-0">
           <Switch>
             <Route exact path="/" component={Home}></Route>
+            <Route path="/manga/:mangaId" component={MangaDetails} />
             <PrivateRoute path="/profile" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
               component={Profile}></PrivateRoute>
             <Route path="/login"

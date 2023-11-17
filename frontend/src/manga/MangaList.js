@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom';
 import read from '../assests/svg/Manga/book.svg';
 
 require("dotenv").config(); // Load environment variables
@@ -86,45 +87,46 @@ const MangaList = () => {
         {mangaList.map((manga) => (
           <div key={manga.mangaId} className=" my-1 px-2 lg:my-2 lg:px-4  w-1/2 lg:w-1/5 overflow-hidden rounded-lg shadow-lg">
             <br />
-            {manga.coverImageUrl && (
-              <img
-                className="block h-32 w-full object-contain ease-in-out duration-300 hover:scale-150"
-                src={manga.coverImageUrl}
-                alt={`Cover for ${manga.title}`}
-              />
-            )}
+            <Link to={`/manga/${manga.mangaId}`}>
+              {manga.coverImageUrl && (
+                <img
+                  className="block h-32 w-full object-contain ease-in-out duration-300 hover:scale-150"
+                  src={manga.coverImageUrl}
+                  alt={`Cover for ${manga.title}`}
+                />
+              )}
 
-            <br />
-            <div className="flex items-center justify-between leading-tight p-2 md:p-4">
-              <h2 className="text-lg overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-blue-600">
-                {manga.title}
-              </h2>
-            </div>
-            {/* Add more details as needed */}
-            <p className="text-grey-darker text-sm">
-              Chapter: {manga.lastChapter}
-            </p>
-            <div className="flex items-center justify-between leading-none md:p-4 ml-0 text-sm">
-              {/* Convert tags object to a comma-separated string */}
+              <br />
+              <div className="flex items-center justify-between leading-tight p-2 md:p-4">
+                <h2 className="text-lg overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-blue-600">
+                  {manga.title}
+                </h2>
+              </div>
+              {/* Add more details as needed */}
+              <p className="text-grey-darker text-sm">
+                Chapter: {manga.lastChapter}
+              </p>
+              <div className="flex items-center justify-between leading-none md:p-4 ml-0 text-sm">
+                {/* Convert tags object to a comma-separated string */}
 
-              <p className="pb-0">
-                <a
-                  className="flex items-center justify-center py-1 w-24 sm:px-0 text-xs/[17px]
+                <p className="pb-0">
+                  <a
+                    className="flex items-center justify-center py-1 w-24 sm:px-0 text-xs/[17px]
                 font-medium transition duration-300 rounded-2xl text-grey-900 bg-grey-300 
                 hover:bg-blue-500 hover:text-white focus:ring-4 focus:ring-grey-300"
-                  href="/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    className="h-5 pr-1"
-                    src={read}
-                    alt="test test"
-                  />
-                  Đọc truyện
-                </a>
-              </p>
-            </div>
+                    href={`manga/${manga.mangaId}`}
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      className="h-5 pr-1"
+                      src={read}
+                      alt="test test"
+                    />
+                    Đọc truyện
+                  </a>
+                </p>
+              </div>
+            </Link>
             <br />
           </div>
         ))}

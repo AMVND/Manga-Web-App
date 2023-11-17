@@ -7,37 +7,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const LastestBar = () => {
   const [mangaList, setMangaList] = useState([]);
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
+  
   useEffect(() => {
     const fetchMangaList = async () => {
       try {
@@ -104,6 +74,30 @@ const LastestBar = () => {
     fetchMangaList();
   }, []);
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    responsive: [
+      {
+        breakpoint: 4000,
+        settings: {
+          slidesToShow: 6,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   // Helper function to get the ID from the relationships array
   const getRelationshipId = (resource, relationshipType) => {
     const relationship = resource.relationships.find((rel) => rel.type === relationshipType);
@@ -112,7 +106,7 @@ const LastestBar = () => {
 
   return (
     <div className="container my-6 mx-auto px-2 md:px-8">
-      <h1>FEATURED MANGA</h1>
+      <h1>Mới cập nhật</h1>
       <Slider {...settings} className='flex flex-wrap -mx-1 lg:-mx-1'>
         {mangaList.map((manga) => (
           <div key={manga.mangaId} className=" my-1 px-2 w-full w-1/2 lg:my-2 lg:px-4 lg:w-1/6 overflow-hidden rounded-lg shadow-lg">
