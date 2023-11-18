@@ -1,5 +1,0 @@
--- CREATE DATABASE NAME --
-CREATE DATABASE `wibu_corner`;
-
--- CREATE TABLE --
-
