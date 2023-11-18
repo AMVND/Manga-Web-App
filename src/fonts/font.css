@@ -1,0 +1,13 @@
+/* src/styles/fonts.css */
+@font-face {
+    font-family: 'YourFontFamily'; /* Replace with the desired font name */
+    src: url('./Spartan-Bold.ttf') ,
+         url('./Spartan-Medium.ttf'),
+         url('./Spartan-Regular.ttf'),
+         url('./Spartan-SemiBold.ttf'),
+  }
+  
+  body {
+    font-family: 'spartan', sans-serif;
+  }
+  
