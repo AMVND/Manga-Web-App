@@ -5,7 +5,7 @@ export const navLinks = [
     },
     {
       name: "Hot",
-      href: "/hot",
+      href: "/featured",
       current: false
     },
     {
