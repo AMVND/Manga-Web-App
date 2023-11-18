@@ -1,16 +1,13 @@
-import React from "react";
+import React, {useEffect} from "react";
 import FeaturedBar from "./featured/FeaturedBar";
 import LastestBar from "./lastest/LastestBar";
 import FollowSideBar from "./followed/FollowSideBar";
-import BreadCrumbs from "./breadcrumbs/BreadCrumbs";
 import MangaList from "../manga/MangaList";
 
 export default function Home() {
-  return (
-    <div className="container my-6 mx-auto px-2 md:px-8 rounded-lg">
-      {/* <BreadCums/> */}
-      <BreadCrumbs />
 
+   return (
+    <div className="container my-6 mx-auto px-2 md:px-8 rounded-lg">
       <div className="w-full">
         {/* <FeaturedBar/> */}
         <FeaturedBar />
