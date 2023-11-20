@@ -4,6 +4,7 @@ import axios from 'axios';
 const MangaDetails = ({ match }) => {
   const [mangaDetails, setMangaDetails] = useState(null);
   const [coverImageUrl, setCoverImageUrl] = useState(null);
+  const [chapterList, setChapterList] = useState([]);
 
   const fetchCoverImage = async (manga) => {
     const coverId = getRelationshipId(manga, 'cover_art');
@@ -41,6 +42,15 @@ const MangaDetails = ({ match }) => {
         setMangaDetails(manga);
 
         fetchCoverImage(manga);
+
+        // Fetch chapter list
+        const chapterResponse = await axios.get(`https://api.mangadex.org/manga/${mangaId}/feed`);
+        const chapters = chapterResponse.data.data;
+
+        // Sort chapters in ascending order based on chapter number
+        chapters.sort((a, b) => b.attributes.chapter - a.attributes.chapter);
+
+        setChapterList(chapters);
 
       } catch (error) {
         console.error('Error fetching manga details:', error);
@@ -150,6 +160,30 @@ const MangaDetails = ({ match }) => {
                   </span>
                 ))}
               </div>
+            </div>
+          )}
+
+          {/* Chapter */}
+          {mangaDetails?.attributes?.tags && (
+            <div className="mb-4">
+              <p className="text-white font-semibold">Danh sách chapter:</p>
+              <ul className='max-w-md divide-y divide-gray-200 dark:divide-gray-700'>
+                {chapterList.map((chapter) => (
+                  <li key={chapter.id} className='pb-3 sm:pb-4'>
+                    <div className="flex items-center space-x-4 rtl:space-x-reverse">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                          Chapter {chapter.attributes.chapter}
+                        </p>
+                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                          {chapter.attributes.title}
+                        </p>
+                      </div>
+                    </div>
+                    {/* Add other chapter details as needed */}
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
 
