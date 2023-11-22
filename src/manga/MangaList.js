@@ -17,26 +17,11 @@ const MangaList = () => {
           offset: (page - 1) * 20, // Adjust the offset based on the current page
         },
       });
-      console.log('API Response:', response.data); // Log the API respons
-      // Update state with fetched manga list and total pages
-    setMangaList(response.data.data);
-    setTotalPages(response.data.total);
-    } catch (error) {
-      console.error('Error fetching manga list:', error);
-    }
-  };
-
-  const fetchData = async () => {
-    try {
-      // Fetch manga list for the specified page
-      const response = await axios.get('https://api.mangadex.org/manga', {
-        params: {
-          limit: 20, // Adjust the limit as needed
-        },
-      });
-
       
-  
+      // Update state with fetched manga list and total pages
+      setMangaList(response.data.data);
+      setTotalPages(Math.ceil(response.data.total / 10));
+   
       // Process manga details
       const mangaWithDetails = await Promise.all(
         response.data.data.map(async (manga) => {
@@ -86,7 +71,6 @@ const MangaList = () => {
       );
 
       setMangaList(mangaWithDetails);
-      setTotalPages(Math.ceil(response.data.total / 20));
     } catch (error) {
       console.error('Error fetching manga details:', error);
     }
@@ -94,7 +78,7 @@ const MangaList = () => {
 
   useEffect(() => {
     console.log('Current Page:', currentPage); // Log the current page
-    fetchData();
+    fetchMangaList(currentPage);
   }, [currentPage]);
 
   const handlePageChange = (newPage) => {
@@ -128,7 +112,7 @@ const MangaList = () => {
                 </h2>
               </div>
               <p className="text-grey-darker text-sm">
-                Chapter: {manga.lastChapter}
+                Chapter: {manga.lastChapter || 'Unknown'}
               </p>
               <div className="flex items-center justify-between leading-none md:p-4 ml-0 text-sm">
                 <p className="pb-0">
@@ -154,11 +138,11 @@ const MangaList = () => {
       </div>
       <div>
         <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-          Previous
+          Trước 
         </button>
         <span>Page {currentPage} of {totalPages}</span>
         <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
-          Next
+          Sau 
         </button>
       </div>
     </div>

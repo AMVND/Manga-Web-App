@@ -5,6 +5,8 @@ const MangaDetails = ({ match }) => {
   const [mangaDetails, setMangaDetails] = useState(null);
   const [coverImageUrl, setCoverImageUrl] = useState(null);
   const [chapterList, setChapterList] = useState([]);
+  const [availableLanguages, setAvailableLanguages] = useState([]);
+  const [selectedLanguage, setSelectedLanguage] = useState('en'); // Default to English
 
   const fetchCoverImage = async (manga) => {
     const coverId = getRelationshipId(manga, 'cover_art');
@@ -30,6 +32,7 @@ const MangaDetails = ({ match }) => {
     const relationships = resource.relationships || [];
     const relationship = relationships.find((rel) => rel.type === relationshipType);
     return relationship ? relationship.id : null;
+
   };
 
   useEffect(() => {
@@ -47,18 +50,33 @@ const MangaDetails = ({ match }) => {
         const chapterResponse = await axios.get(`https://api.mangadex.org/manga/${mangaId}/feed`);
         const chapters = chapterResponse.data.data;
 
-        // Sort chapters in ascending order based on chapter number
-        chapters.sort((a, b) => b.attributes.chapter - a.attributes.chapter);
+        // Extract available languages from the chapter list
+        const languages = Array.from(
+          new Set(chapters.map((chapter) => chapter.attributes.translatedLanguage))
+        );
 
-        setChapterList(chapters);
+        setAvailableLanguages(languages);
 
+        // Filter chapters based on selected language
+        const filteredChapters = chapters.filter(
+          (chapter) => chapter.attributes.translatedLanguage === selectedLanguage
+        );
+
+        // Sort filtered chapters in descending order based on chapter number
+        filteredChapters.sort((a, b) => b.attributes.chapter - a.attributes.chapter);
+
+        setChapterList(filteredChapters);
       } catch (error) {
-        console.error('Error fetching manga details:', error);
+        // Handle errors
       }
     };
 
     fetchMangaDetails();
-  }, [match.params.mangaId]);
+  }, [match.params.mangaId, selectedLanguage]);
+
+  const handleLanguageChange = (language) => {
+    setSelectedLanguage(language);
+  };
 
   return (
     <div className="relative">
@@ -75,7 +93,7 @@ const MangaDetails = ({ match }) => {
           <img
             src={coverImageUrl}
             alt={`Cover for ${mangaDetails?.attributes?.title?.en || 'No Title'}`}
-            className="w-full h-full object-cover"
+            className="w-full object-cover"
           />
         </div>
 
@@ -166,6 +184,28 @@ const MangaDetails = ({ match }) => {
           {/* Chapter */}
           {mangaDetails?.attributes?.tags && (
             <div className="mb-4">
+
+
+
+              {/* Language selection */}
+              <div>
+                <label htmlFor="language">Select Language:</label>
+                <select
+                  id="language"
+                  value={selectedLanguage}
+                  onChange={(e) => handleLanguageChange(e.target.value)}
+                >
+                  {/* Generate options dynamically based on available languages */}
+                  {availableLanguages.map((language) => (
+                    <option key={language} value={language}>
+                      {language}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+
+
               <p className="text-white font-semibold">Danh sách chapter:</p>
               <ul className='max-w-md divide-y divide-gray-200 dark:divide-gray-700'>
                 {chapterList.map((chapter) => (
