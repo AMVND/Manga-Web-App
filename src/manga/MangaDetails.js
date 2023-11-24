@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const MangaDetails = ({ match }) => {
   const [mangaDetails, setMangaDetails] = useState(null);
@@ -77,6 +78,10 @@ const MangaDetails = ({ match }) => {
   const handleLanguageChange = (language) => {
     setSelectedLanguage(language);
   };
+
+  if (!mangaDetails) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="relative">
@@ -184,9 +189,6 @@ const MangaDetails = ({ match }) => {
           {/* Chapter */}
           {mangaDetails?.attributes?.tags && (
             <div className="mb-4">
-
-
-
               {/* Language selection */}
               <div>
                 <label htmlFor="language">Select Language:</label>
@@ -195,7 +197,6 @@ const MangaDetails = ({ match }) => {
                   value={selectedLanguage}
                   onChange={(e) => handleLanguageChange(e.target.value)}
                 >
-                  {/* Generate options dynamically based on available languages */}
                   {availableLanguages.map((language) => (
                     <option key={language} value={language}>
                       {language}
@@ -203,30 +204,27 @@ const MangaDetails = ({ match }) => {
                   ))}
                 </select>
               </div>
-
-
-
               <p className="text-white font-semibold">Danh sách chapter:</p>
               <ul className='max-w-md divide-y divide-gray-200 dark:divide-gray-700'>
                 {chapterList.map((chapter) => (
                   <li key={chapter.id} className='pb-3 sm:pb-4'>
                     <div className="flex items-center space-x-4 rtl:space-x-reverse">
                       <div className="flex-1 min-w-0">
+                        <Link to={`/read/${mangaDetails.id}/${chapter.id}`}>
                         <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
                           Chapter {chapter.attributes.chapter}
                         </p>
                         <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                           {chapter.attributes.title}
                         </p>
+                        </Link>
                       </div>
                     </div>
-                    {/* Add other chapter details as needed */}
                   </li>
                 ))}
               </ul>
             </div>
           )}
-
         </div>
         <div className="bg-white w-full absolute inset-0 -z-50 mt-48"></div>
       </div>

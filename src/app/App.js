@@ -4,6 +4,7 @@ import Navbar from '../common/Navbar';
 import Home from '../pages/Home'
 import NotFound from '../common/NotFound';
 import MangaDetails from '../manga/MangaDetails';
+import ReadManga from '../manga/ReadManga';
 
 export class App extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ export class App extends Component {
             <Switch>
               <Route exact path="/" component={Home}></Route>
               <Route path="/manga/:mangaId" component={MangaDetails} />
+              <Route path="/read/:mangaId/:chapterId" component={ReadManga} />
               <Route component={NotFound}></Route>
             </Switch>
         </div>
