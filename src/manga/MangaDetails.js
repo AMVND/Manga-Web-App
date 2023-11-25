@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import LoadingIndicator from '../common/LoadinIndicator';
 
 const MangaDetails = ({ match }) => {
   const [mangaDetails, setMangaDetails] = useState(null);
@@ -73,14 +74,14 @@ const MangaDetails = ({ match }) => {
     };
 
     fetchMangaDetails();
-  }, [match.params.mangaId, selectedLanguage]);
+  }, [fetchCoverImage, match.params.mangaId, selectedLanguage]);
 
   const handleLanguageChange = (language) => {
     setSelectedLanguage(language);
   };
 
   if (!mangaDetails) {
-    return <div>Loading...</div>;
+    return <LoadingIndicator/>;
   }
 
   return (
@@ -117,42 +118,42 @@ const MangaDetails = ({ match }) => {
             <>
               {/* Additional Information */}
               <div className="mb-4">
-                <p className="text-black font-bold">Original Language:</p>
+                <p className="text-black font-bold">Ngôn ngữ gốc:</p>
                 <p>{mangaDetails.attributes.originalLanguage || 'Unknown'}</p>
               </div>
 
               <div className="mb-4">
-                <p className="text-black font-bold">Last Volume:</p>
+                <p className="text-black font-bold">Tập mới nhất:</p>
                 <p>{mangaDetails.attributes.lastVolume || 'Unknown'}</p>
               </div>
 
               <div className="mb-4">
-                <p className="text-black font-bold">Last Chapter:</p>
+                <p className="text-black font-bold">Chương mới nhất:</p>
                 <p>{mangaDetails.attributes.lastChapter || 'Unknown'}</p>
               </div>
 
               <div className="mb-4">
-                <p className="text-black font-bold">Publication Demographic:</p>
+                <p className="text-black font-bold">Số lượng xuất bản:</p>
                 <p>{mangaDetails.attributes.publicationDemographic || 'Unknown'}</p>
               </div>
 
               <div className="mb-4">
-                <p className="text-black font-bold">Status:</p>
+                <p className="text-black font-bold">Trạng thái:</p>
                 <p>{mangaDetails.attributes.status || 'Unknown'}</p>
               </div>
 
               <div className="mb-4">
-                <p className="text-black font-bold">Year:</p>
+                <p className="text-black font-bold">Năm:</p>
                 <p>{mangaDetails.attributes.year || 'Unknown'}</p>
               </div>
 
               <div className="mb-4">
-                <p className="text-black font-bold">Content Rating:</p>
+                <p className="text-black font-bold">Xếp hạng nội dung:</p>
                 <p>{mangaDetails.attributes.contentRating || 'Unknown'}</p>
               </div>
 
               <div className="mb-4">
-                <p className="text-black font-bold">Chapter Numbers Reset on New Volume:</p>
+                <p className="text-black font-bold">Đặt lại số chương ở tập mới:</p>
                 <p>{mangaDetails.attributes.chapterNumbersResetOnNewVolume ? 'Yes' : 'No'}</p>
               </div>
 
@@ -163,7 +164,7 @@ const MangaDetails = ({ match }) => {
                   className="text-white bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded-md inline-block"
                   rel="noopener noreferrer"
                 >
-                  Read Latest Chapter
+                  Đọc chapter mới nhất
                 </a>
               )}
             </>
@@ -191,7 +192,7 @@ const MangaDetails = ({ match }) => {
             <div className="mb-4">
               {/* Language selection */}
               <div>
-                <label htmlFor="language">Select Language:</label>
+                <label htmlFor="language">Ngôn ngữ:</label>
                 <select
                   id="language"
                   value={selectedLanguage}
@@ -210,14 +211,13 @@ const MangaDetails = ({ match }) => {
                   <li key={chapter.id} className='pb-3 sm:pb-4'>
                     <div className="flex items-center space-x-4 rtl:space-x-reverse">
                       <div className="flex-1 min-w-0">
-                        <Link to={`/read/${mangaDetails.id}/${chapter.id}`}>
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Chapter {chapter.attributes.chapter}
-                        </p>
+                        {/* Use Link directly without wrapping it inside another anchor tag */}
+                        <Link to={`/read/${mangaDetails.id}/${chapter.id}`} className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                          Chương {chapter.attributes.chapter}
+                        </Link>
                         <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                           {chapter.attributes.title}
                         </p>
-                        </Link>
                       </div>
                     </div>
                   </li>
