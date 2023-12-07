@@ -7,7 +7,7 @@ import MangaList from "../manga/MangaList";
 export default function Home() {
 
    return (
-    <div className="container my-6 mx-auto px-2 md:px-8 rounded-lg">
+    <div className="container my-6 mx-auto px-2 md:px-8 rounded-lg dark:bg-gray-400">
       <div className="w-full">
         {/* <FeaturedBar/> */}
         <FeaturedBar />

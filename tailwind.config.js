@@ -1,10 +1,19 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        myShadow1Dark: "4.1px -5px 0 0 rgb(17,24,39)",
+        myShadow1White: "4.1px -5px 0 0 rgb(255, 255, 255)",
+        myShadow2Dark: "-4.1px -5px 0 0 rgb(17,24,39)",
+        myShadow2White: "-4.1px -5px 0 0 rgb(255, 255, 255)",
+      },
+    },
   },
   plugins: [],
 }

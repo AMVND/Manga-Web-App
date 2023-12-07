@@ -1,9 +1,10 @@
-import React, { Component} from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Disclosure} from '@headlessui/react'
+import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { navLinks } from '../constants/Navigation';
 import klee from '../assests/img/klee_icon.png'
+import ThemeSwitcher from './ThemeSwitcher';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -12,7 +13,7 @@ function classNames(...classes) {
 export class Navbar extends Component {
     render() {
         return (
-            <Disclosure as="nav" className="bg-blue-500 sticky top-0 z-50">
+            <Disclosure as="nav" className="bg-blue-500 dark:bg-rose-800 sticky top-0 z-50">
                 {({ open }) => (
                     <>
                         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -41,6 +42,8 @@ export class Navbar extends Component {
                                             ))}
                                         </div>
                                     </div>
+                                    <div className='hidden md:block'>
+                                        <ThemeSwitcher /></div>
                                 </div>
                                 <div className="-mr-2 flex md:hidden">
                                     {/* Mobile menu button */}
@@ -73,6 +76,7 @@ export class Navbar extends Component {
                                         {item.name}
                                     </Disclosure.Button>
                                 ))}
+                                <ThemeSwitcher/>
                             </div>
                         </Disclosure.Panel>
                     </>
