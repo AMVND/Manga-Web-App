@@ -88,11 +88,11 @@ const FollowSideBar = () => {
   };
 
   return (
-    <div className="h-auto rounded-lg bg-gray-200 px-0 lg:px-4">
+    <div className="h-auto rounded-lg bg-gray-200 px-0 lg:px-4 dark:bg-gray-900">
       <div className="px-0 pt-2 lg:py-4">
         <div className="flex flex-col space-y-4">
           {mangaList.map((manga) => (
-            <div key={manga.mangaId} className="  py-1 rounded-lg shadow-xl  min-w-full bg-white">
+            <div key={manga.mangaId} className="  py-1 rounded-lg shadow-xl  min-w-full bg-white dark:bg-gray-900">
               <div className="flex flex-row space-x-3 pl-2">
                 {manga.coverImageUrl && (
                   <img
@@ -104,20 +104,20 @@ const FollowSideBar = () => {
 
                 <div className="flex flex-col space-y-1">
                   <div className="flex items-center justify-between leading-tight p-2 md:p-4">
-                    <h2 className="text-md overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-blue-600 line-clamp-1">
+                    <h2 className="text-md overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-blue-600 line-clamp-1 dark:text-white">
                       <a href={`manga/${manga.mangaId}`} className="truncate">
                         {manga.title}
                       </a>
                     </h2>
                   </div>
                   <span className="flex flex-row">
-                    <p className="flex items-center justify-start w-28 sm:px-0 mb-4 mt-1 text-sm font-medium">
+                    <p className="flex items-center justify-start w-28 sm:px-0 mb-4 mt-1 text-sm font-medium dark:text-white">
                       Chapter: {manga.lastChapter}
                     </p>
 
                     <a
                       className="flex items-center justify-center w-24 sm:px-0 mb-4 mt-1 text-sm 
-                font-medium transition duration-100  hover:text-purple-700"
+                font-medium transition duration-100  hover:text-purple-700 dark:text-white"
                       href="/"
                       rel="noopener noreferrer"
                     >

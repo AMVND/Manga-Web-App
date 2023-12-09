@@ -122,14 +122,14 @@ const FeaturedBar = () => {
 
             <br />
             <div className="flex items-center justify-between leading-tight p-2 md:p-4">
-              <h2 className="text-lg overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-blue-600">
+              <h2 className="text-lg overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-blue-600 dark:text-white">
                 <a href={`manga/${manga.mangaId}`}>
                   {manga.title}
                 </a>
               </h2>
             </div>
             {/* Add more details as needed */}
-            <p className="text-grey-darker text-sm">
+            <p className="text-grey-darker text-sm dark:text-white">
               Chapter: {manga.lastChapter}
             </p>
             <br />

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
-import read from '../assests/svg/Manga/book.svg';
 
 const MangaList = () => {
   const [mangaList, setMangaList] = useState([]);
@@ -93,53 +92,46 @@ const MangaList = () => {
   };
 
   return (
-    <div className="container my-6 mx-auto px-2 md:px-8">
-      <h1>MANGA LIST</h1>
-      <div className="flex flex-wrap -mx-1 lg:-mx-1">
-        {mangaList.map((manga) => (
-          <div key={manga.mangaId} className="my-1 px-2 lg:my-2 lg:px-4 w-1/2 lg:w-1/5 overflow-hidden rounded-lg shadow-lg">
+    <div className="bg-white rounded-lg px-4 dark:bg-gray-900">
+      <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-4 lg:max-w-7xl lg:px-8">
+        <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white ">Danh sách Manga</h2>
+        <div className="mt-6 grid gap-x-6 gap-y-10 grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          {mangaList.map((manga) => (
             <Link to={`/manga/${manga.mangaId}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-              {manga.coverImageUrl && (
-                <img
-                  className="block h-32 w-full object-contain ease-in-out duration-300 hover:scale-150"
-                  src={manga.coverImageUrl}
-                  alt={`Cover for ${manga.title}`}
-                />
-              )}
-              <div className="flex items-center justify-between leading-tight p-2 md:p-4">
-                <h2 className="text-lg overflow-hidden whitespace-nowrap overflow-ellipsis hover:text-blue-600">
-                  {manga.title}
-                </h2>
-              </div>
-              <div className="text-grey-darker text-sm"> {/* Change from <p> to <div> */}
-                Chapter: {manga.lastChapter || 'Unknown'}
-              </div>
-              <div className="flex items-center justify-between leading-none md:p-4 ml-0 text-sm">
-                <div className="pb-0"> {/* Change from <p> to <div> */}
-                  <div
-                    className="flex items-center justify-center py-1 w-24 sm:px-0 text-xs/[17px]
-            font-medium transition duration-300 rounded-2xl text-grey-900 bg-grey-300 
-            hover:bg-blue-500 hover:text-white focus:ring-4 focus:ring-grey-300"
-                  >
+              <div key={manga.mangaId} className="group relative">
+                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                  {manga.coverImageUrl && (
                     <img
-                      className="h-5 pr-1"
-                      src={read}
-                      alt="test test"
+                      src={manga.coverImageUrl}
+                      alt={`Cover for ${manga.title}`}
+                      className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                     />
-                    Đọc truyện
-                  </div>
+                  )}
+                </div>
+                <div className="mt-4 flex justify-between ">
+                    <p className="text-gray-700 dark:text-white truncate md:text-clip ">
+                      {manga.title}
+                    </p>
+                    <p className="mt-1 text-sm text-gray-500 dark:text-white truncate md:text-clip">Chapter: {manga.lastChapter || 'Unknown'}</p>
+                  <p className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Đọc truyện</p>
                 </div>
               </div>
             </Link>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-      <div>
-        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+      {/* Add more items as needed */}
+      <div className="flex items-center justify-between border-t border-gray-200 px-4 py-3 sm:px-6">
+        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}
+          type="button"
+          className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+        >
           Trước
         </button>
-        <span>Page {currentPage} of {totalPages}</span>
-        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+        <span className="text-gray-900 dark:text-white">{currentPage} of {totalPages}</span>
+        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} type="button"
+          className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+        >
           Sau
         </button>
       </div>
