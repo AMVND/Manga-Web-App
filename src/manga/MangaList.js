@@ -104,7 +104,7 @@ const MangaList = () => {
                     <img
                       src={manga.coverImageUrl}
                       alt={`Cover for ${manga.title}`}
-                      className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                      className="h-full w-full object-cover object-center lg:h-full lg:w-full object-contain ease-in-out duration-300 hover:scale-150"
                     />
                   )}
                 </div>
@@ -113,7 +113,6 @@ const MangaList = () => {
                       {manga.title}
                     </p>
                     <p className="mt-1 text-sm text-gray-500 dark:text-white truncate md:text-clip">Chapter: {manga.lastChapter || 'Unknown'}</p>
-                  <p className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Đọc truyện</p>
                 </div>
               </div>
             </Link>
