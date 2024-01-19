@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/Manga-Web-App/static/css/main.0221bfa7.css",
+    "main.js": "/Manga-Web-App/static/js/main.464c7bbe.js",
+    "static/js/787.22edae46.chunk.js": "/Manga-Web-App/static/js/787.22edae46.chunk.js",
+    "static/media/klee_cry.png": "/Manga-Web-App/static/media/klee_cry.97037daa98ab6d5b746c.png",
+    "static/media/klee_icon.png": "/Manga-Web-App/static/media/klee_icon.039c6b7a7453560c94f1.png",
+    "static/media/Spartan-Medium.ttf": "/Manga-Web-App/static/media/Spartan-Medium.a1134e630ced5e21dd92.ttf",
+    "static/media/Spartan-SemiBold.ttf": "/Manga-Web-App/static/media/Spartan-SemiBold.56928e6fa799541ca40a.ttf",
+    "static/media/Spartan-Regular.ttf": "/Manga-Web-App/static/media/Spartan-Regular.e6c19f62235a53490ec2.ttf",
+    "static/media/Spartan-Bold.ttf": "/Manga-Web-App/static/media/Spartan-Bold.386419b2a5c9d587e458.ttf",
+    "static/media/slick.svg": "/Manga-Web-App/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/Manga-Web-App/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/Manga-Web-App/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/Manga-Web-App/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/Manga-Web-App/index.html",
+    "main.0221bfa7.css.map": "/Manga-Web-App/static/css/main.0221bfa7.css.map",
+    "main.464c7bbe.js.map": "/Manga-Web-App/static/js/main.464c7bbe.js.map",
+    "787.22edae46.chunk.js.map": "/Manga-Web-App/static/js/787.22edae46.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0221bfa7.css",
+    "static/js/main.464c7bbe.js"
+  ]
+}

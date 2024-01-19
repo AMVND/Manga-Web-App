@@ -89,7 +89,7 @@ const ReadManga = () => {
                   console.log('Loop Index:', index);
 
                   // Construct the image URLs using the server information
-                  const imageUrl = `${serverInfo.baseUrl}/data-saver/${page.attributes.hash}`;
+                  const imageUrl = `${serverInfo}/data-saver/${page.attributes.hash}`;
                   console.log('Image URL:', imageUrl);
 
                   return (
